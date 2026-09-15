@@ -1,0 +1,208 @@
+Created At: 2026-09-15T14:45:13Z
+Completed At: 2026-09-15T14:45:13Z
+File Path: `file:///c:/Users/Queta/.wifi/simulado.html`
+Total Lines: 859
+Total Bytes: 51174
+Showing lines 101 to 300
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+101:     .options-list {
+102:       list-style: none;
+103:       padding: 0;
+104:       margin: 0 0 16px 0;
+105:     }
+106:     .option-item {
+107:       margin-bottom: 8px;
+108:     }
+109:     .option-label {
+110:       display: flex;
+111:       align-items: flex-start;
+112:       padding: 10px 14px;
+113:       border: 1px solid var(--border);
+114:       border-radius: 6px;
+115:       cursor: pointer;
+116:       transition: background-color 0.2s;
+117:     }
+118:     .option-label:hover {
+119:       background-color: #f8fafc;
+120:     }
+121:     .option-label input {
+122:       margin-top: 4px;
+123:       margin-right: 12px;
+124:       cursor: pointer;
+125:     }
+126:     .feedback {
+127:       display: none;
+128:       padding: 16px;
+129:       border-radius: 8px;
+130:       margin-top: 14px;
+131:       font-size: 0.95rem;
+132:     }
+133:     .feedback.correct {
+134:       background-color: var(--correct-bg);
+135:       border: 1px solid var(--correct);
+136:       color: #14532d;
+137:     }
+138:     .feedback.incorrect {
+139:       background-color: var(--incorrect-bg);
+140:       border: 1px solid var(--incorrect);
+141:       color: #7f1d1d;
+142:     }
+143:     .feedback-title {
+144:       font-weight: bold;
+145:       margin-bottom: 6px;
+146:     }
+147:   </style>
+148: </head>
+149: <body>
+150: 
+151: <div class="container">
+152:   <header>
+153:     <h1>Simulado Cesgranrio – Transpetro 2026.4</h1>
+154:     <p><strong>Cargo:</strong> Profissional de Nível Superior - Júnior | <strong>Ênfase 7:</strong> Segurança Cibernética e da Informação</p>
+155:     <p>50 Questões Objetivas com gabarito comentado e correção instantânea.</p>
+156:   </header>
+157: 
+158:   <div class="score-banner">
+159:     <div>Questões Respondidas: <span id="answered-count">0</span> / 50</div>
+160:     <div>Pontuação Atual: <span id="current-score">0</span> pontos</div>
+161:     <button class="btn-reset" onclick="resetQuiz()">Reiniciar Simulado</button>
+162:   </div>
+163: 
+164:   <div id="quiz-container"></div>
+165: </div>
+166: 
+167: <script>
+168: const quizData = [
+169:   {
+170:     q: "Um analista de segurança cibernética está conduzindo um teste de intrusão e precisa realizar uma varredura de portas furtiva (stealth) que não complete a conexão TCP de três vias (three-way handshake) e que evite registrar conexões completas nas aplicações dos servidores-alvo. O comando Nmap e o sinalizador corretos para atingir esse objetivo são:",
+171:     opts: [
+172:       "(A) nmap -sT 192.168.1.0/24",
+173:       "(B) nmap -sS 192.168.1.0/24",
+174:       "(C) nmap -sU 192.168.1.0/24",
+175:       "(D) nmap -sA 192.168.1.0/24",
+176:       "(E) nmap -sV 192.168.1.0/24"
+177:     ],
+178:     ans: 1,
+179:     exp: "O sinalizador -sS ativa o TCP SYN Scan (meio-aberto / stealth scan). Ele envia um pacote SYN; se receber SYN/ACK, envia imediatamente um RST para abortar a conexão sem completar o aperto de mãos (handshake). O -sT completa a conexão (TCP Connect), o -sU é para UDP, o -sA é ACK scan para mapear regras de firewall e o -sV detecta versões de serviços."
+180:   },
+181:   {
+182:     q: "Durante a execução de um pentest interno em ambiente Active Directory corporativo, o operador utiliza o Mimikatz para extrair credenciais da memória do processo lsass.exe. O comando específico do Mimikatz utilizado para descarregar senhas em texto claro por meio do provedor WDigest é:",
+183:     opts: [
+184:       "(A) kerberos::golden",
+185:       "(B) sekurlsa::logonpasswords",
+186:       "(C) lsadump::dcsync",
+187:       "(D) privilege::debug /process:lsass",
+188:       "(E) token::elevate"
+189:     ],
+190:     ans: 1,
+191:     exp: "O módulo sekurlsa::logonpasswords do Mimikatz extrai senhas em texto plano, hashes NTLM e tíquetes Kerberos diretamente da memória do LSASS (LSA Security Authority Subsystem Service), lendo os provedores de autenticação como o WDigest."
+192:   },
+193:   {
+194:     q: "A ABNT NBR ISO/IEC 27002:2022 reestruturou os controles de segurança em 4 temas principais. O controle de 'Gestão de Configuração' (Configuration Management) está classificado sob qual tema?",
+195:     opts: [
+196:       "(A) Controles Organizacionais",
+197:       "(B) Controles de Pessoas",
+198:       "(C) Controles Físicos",
+199:       "(D) Controles Tecnológicos",
+200:       "(E) Controles Ambientais"
+201:     ],
+202:     ans: 3,
+203:     exp: "Na ISO/IEC 27002:2022, o controle 8.9 (Gestão de configurações) é classificado sob o tema 'Controles Tecnológicos' (Tema 8). Os 4 temas da norma são: Organizacionais (Tema 5), Pessoas (Tema 6), Físicos (Tema 7) e Tecnológicos (Tema 8)."
+204:   },
+205:   {
+206:     q: "Na arquitetura de segurança para sistemas de controle e automação industrial (IACS) definida pela norma ANSI/ISA-62443 (e IEC 62443), o conceito que consiste no agrupamento lógico de ativos industriais que compartilham os mesmos requisitos de segurança é denominado:",
+207:     opts: [
+208:       "(A) Canal Conduíte (Conduit)",
+209:       "(B) Nível de Vetor (Vector Level)",
+210:       "(C) Zona (Zone)",
+211:       "(D) Enclave DMZ",
+212:       "(E) Barramento de Telemetria"
+213:     ],
+214:     ans: 2,
+215:     exp: "Na IEC 62443-3-2, uma 'Zona' é uma coleção lógica ou física de ativos que possuem requisitos comuns de segurança cibernética. A comunicação entre diferentes Zonas é governada exclusivamente por 'Condutos' (Conduits)."
+216:   },
+217:   {
+218:     q: "O Framework MITRE ATT&CK organiza o comportamento dos adversários cibernéticos. A diferença fundamental entre 'Tática' (Tactic) e 'Técnica' (Technique) no modelo ATT&CK é que a Tática representa:",
+219:     opts: [
+220:       "(A) a ferramenta ou malware específico utilizado pelo invasor, enquanto a Técnica define a versão do exploit.",
+221:       "(B) o objetivo do adversário (o 'porquê'), enquanto a Técnica descreve a ação concreta executada para alcançar esse objetivo (o 'como').",
+222:       "(C) o indicador de comprometimento (IoC) em nível de rede, enquanto a Técnica detalha o hash do executável.",
+223:       "(D) a resposta do time defensivo (Blue Team), enquanto a Técnica é o ataque executado pelo Red Team.",
+224:       "(E) a fase cronológica estrita de um ataque, sendo a Técnica a probabilidade de falha desse ataque."
+225:     ],
+226:     ans: 1,
+227:     exp: "No MITRE ATT&CK, 'Tática' descreve a meta operacional ou tática do atacante (ex.: Acesso Inicial, Persistência, Movimentação Lateral) - o 'porquê'. Já a 'Técnica' descreve a maneira de executar esse objetivo (o 'como')."
+228:   },
+229:   {
+230:     q: "No contexto da gestão de riscos de segurança da informação segundo a ABNT NBR ISO/IEC 27005:2023, quando uma organização decide contratar uma apólice de seguro cibernético para cobrir possíveis perdas financeiras decorrentes de incidentes, ela está adotando a seguinte opção de tratamento de risco:",
+231:     opts: [
+232:       "(A) Retenção do risco (Risk retention)",
+233:       "(B) Modificação do risco (Risk modification)",
+234:       "(C) Compartilhamento do risco (Risk sharing)",
+235:       "(D) Evitação do risco (Risk avoidance)",
+236:       "(E) Eliminação total do risco (Risk nullification)"
+237:     ],
+238:     ans: 2,
+239:     exp: "Compartilhar o risco (risk sharing / transferência) envolve dividir ou repassar parte dos custos e perdas com terceiros, sendo a contratação de apólices de seguro ou contratos com fornecedores os exemplos clássicos citados na ISO 27005."
+240:   },
+241:   {
+242:     q: "A ferramenta de engenharia reversa Ghidra, desenvolvida pela NSA e amplamente utilizada em análise de malwares, possui como funcionalidade nuclear que a distingue de disassemblers puramente estáticos lineares a capacidade de:",
+243:     opts: [
+244:       "(A) executar exploits em tempo real contra sistemas remotos sem necessidade de payload.",
+245:       "(B) descompilar código de máquina em pseudocódigo legível em linguagem semelhante a C.",
+246:       "(C) calcular automaticamente colisões SHA-256 para forjar certificados digitais.",
+247:       "(D) atuar como firewall de camada de aplicação inspecionando tráfego TLS em tempo real.",
+248:       "(E) converter automaticamente malwares Windows em binários ELF Linux sem perda de funções."
+249:     ],
+250:     ans: 1,
+251:     exp: "O principal diferencial do Ghidra (além de sua arquitetura baseada em Sleigh) é o seu Decompiler integrado gratuito, capaz de traduzir instruções de assembly/código de máquina para uma representação em pseudocódigo C de alta legibilidade."
+252:   },
+253:   {
+254:     q: "Um atacante posiciona um ponto de acesso sem fio falso nas imediações de um terminal portuário, clonando o SSID e o endereço MAC do roteador legítimo da empresa, transmitindo com maior potência para forçar a reconexão das estações corporativas. Esse vetor de ataque Wi-Fi é classificado como:",
+255:     opts: [
+256:       "(A) War driving",
+257:       "(B) Evil Twin (Gêmeo Maligno)",
+258:       "(C) Bluebugging",
+259:       "(D) VLAN Hopping",
+260:       "(E) Buffer Overflow"
+261:     ],
+262:     ans: 1,
+263:     exp: "O Evil Twin é uma variante maliciosa de rogue AP configurada para imitar exatamente o SSID e configurações de uma rede legítima (muitas vezes forçando a desassociação prévia do AP legítimo) para interceptar o tráfego dos usuários."
+264:   },
+265:   {
+266:     q: "No framework NIST CSF 2.0 (Cybersecurity Framework), lançado em 2024, foi introduzida uma nova Função aos pilares existentes (Identify, Protect, Detect, Respond, Recover). Essa nova Função denomina-se:",
+267:     opts: [
+268:       "(A) Analyze",
+269:       "(B) Govern (Governar)",
+270:       "(C) Mitigate",
+271:       "(D) Enforce",
+272:       "(E) Automate"
+273:     ],
+274:     ans: 1,
+275:     exp: "O NIST CSF 2.0 adicionou oficialmente a Função GOVERN (GV), que permeia todas as outras funções e estabelece a estratégia, políticas, liderança e gestão de riscos da organização em cibersegurança."
+276:   },
+277:   {
+278:     q: "No protocolo TLS 1.3 (RFC 8446), para aumentar a segurança e garantir o sigilo direto perfeito (PFS - Perfect Forward Secrecy), foi removido expressamente o suporte a:",
+279:     opts: [
+280:       "(A) Curvas Elípticas ECDHE",
+281:       "(B) Mecanismos de troca de chaves RSA estático e cifras sem suporte a AEAD",
+282:       "(C) Hashes SHA-256 e SHA-384",
+283:       "(D) Troca de chaves Diffie-Hellman efêmero",
+284:       "(E) Autenticação mútua baseada em certificados X.509"
+285:     ],
+286:     ans: 1,
+287:     exp: "O TLS 1.3 removeu completamente o suporte à troca de chaves RSA estático (que não provê Perfect Forward Secrecy) e suites de cifras antigas/vulneráveis (CBC, RC4), exigindo exclusivamente cifras do tipo AEAD (como AES-GCM e ChaCha20-Poly1305) com troca DHE/ECDHE efêmera."
+288:   },
+289:   {
+290:     q: "De acordo com a norma ABNT NBR ISO/IEC 27035-1:2023 (Gestão de incidentes de segurança da informação), o ciclo de vida estruturado do processo de gestão de incidentes é composto pelas fases:",
+291:     opts: [
+292:       "(A) Identificação, Bloqueio, Erradicação e Punição.",
+293:       "(B) Planejamento e preparação; Detecção e relatório; Avaliação e decisão; Respostas; e Lições aprendidas.",
+294:       "(C) Varredura; Exploração; Pós-exploração; e Limpeza de logs.",
+295:       "(D) Criação de regras; Aplicação de patches; Reinicialização de servidores; e Auditoria.",
+296:       "(E) Análise de impacto; Assinatura de contrato; Execução de testes; e Arquivamento."
+297:     ],
+298:     ans: 1,
+299:     exp: "A ISO/IEC 27035-1 estrutura a gestão de incidentes em 5 fases contínuas: 1. Planejamento e preparação; 2. Detecção e relato; 3. Avaliação e decisão; 4. Respostas; 5. Lições aprendidas."
+300:   },
+The above content does NOT show the entire file contents. If you need to view any lines of the file which were not shown to complete your task, call this tool again to view those lines.
