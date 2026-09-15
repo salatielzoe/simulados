@@ -1,7 +1,7 @@
 /**
  * Banco de Dados de Questões - Simulado Cesgranrio Transpetro
  * Ênfase 7: Segurança Cibernética e da Informação
- * Total: 50 Questões Objetivas com Gabarito Comentado
+ * Total: 80 Questões Objetivas com Gabarito Comentado
  */
 
 const quizData = [
@@ -754,6 +754,456 @@ const quizData = [
     ],
     "ans": 1,
     "exp": "No envelope digital (criptografia híbrida), o volume grande de dados é cifrado por um algoritmo simétrico rápido (AES) usando uma chave de sessão efêmera; em seguida, essa chave de sessão é cifrada com a chave pública assimétrica do destinatário."
+  },
+  {
+    "id": 51,
+    "category": "Normas & Governança",
+    "difficulty": "Médio",
+    "q": "Um analista de segurança identificou que um banco de dados corporativo sofreu uma invasão na qual diversos registros de valores financeiros foram adulterados sem autorização, embora nenhum dado tenha sido tornado público e os servidores continuem operando normalmente. Sob a ótica dos pilares clássicos da segurança da informação (ISO/IEC 27001), o atributo primariamente violado nesse incidente foi a:",
+    "opts": [
+      "(A) Confidencialidade.",
+      "(B) Disponibilidade.",
+      "(C) Integridade.",
+      "(D) Irretratabilidade.",
+      "(E) Autenticidade."
+    ],
+    "ans": 2,
+    "exp": "A alteração indevida de dados afeta diretamente a **Integridade** (exatidão/imutabilidade dos dados)."
+  },
+  {
+    "id": 52,
+    "category": "Legislação & Criptografia",
+    "difficulty": "Fácil",
+    "q": "A Lei Geral de Proteção de Dados Pessoais (LGPD - Lei nº 13.709/2018), em seu art. 6º, estabelece os princípios que devem ser observados nas atividades de tratamento de dados pessoais. Dentre os princípios expressamente previstos no texto da LGPD, NÃO se inclui o princípio da:",
+    "opts": [
+      "(A) Finalidade.",
+      "(B) Irretratabilidade.",
+      "(C) Não discriminação.",
+      "(D) Prevenção.",
+      "(E) Adequação."
+    ],
+    "ans": 1,
+    "exp": "A **Irretratabilidade** é um pilar da segurança da informação (doutrina ISO), mas não consta na lista de princípios do art. 6º da LGPD."
+  },
+  {
+    "id": 53,
+    "category": "Legislação & Criptografia",
+    "difficulty": "Difícil",
+    "q": "Em um sistema de compras governamentais, é fundamental que o fornecedor vencedor de uma licitação não possa, posteriormente à submissão da proposta assinada digitalmente com certificado padrão ICP-Brasil, negar a autoria e o envio do respectivo lance. O mecanismo criptográfico da assinatura digital assegura fundamentalmente o atributo da:",
+    "opts": [
+      "(A) Confidencialidade.",
+      "(B) Disponibilidade.",
+      "(C) Irretratabilidade.",
+      "(D) Anonimização.",
+      "(E) Transparência."
+    ],
+    "ans": 2,
+    "exp": "A assinatura digital garante integridade, autenticidade e **Irretratabilidade** (o autor não pode negar a autoria da transação)."
+  },
+  {
+    "id": 54,
+    "category": "Princípios de Segurança",
+    "difficulty": "Médio",
+    "q": "Uma organização sofreu um ataque massivo de negação de serviço distribuído (DDoS) que congestionou seus links de comunicação e tornou indisponível o portal de atendimento ao cliente durante 12 horas. Durante a investigação, constatou-se que não houve vazamento nem corrupção de dados dos clientes. O princípio da segurança da informação que sofreu impacto direto foi a:",
+    "opts": [
+      "(A) Confidencialidade.",
+      "(B) Disponibilidade.",
+      "(C) Autenticidade.",
+      "(D) Integridade.",
+      "(E) Irretratabilidade."
+    ],
+    "ans": 1,
+    "exp": "O ataque DDoS tem como alvo primário a paralisação do serviço, comprometendo a **Disponibilidade**."
+  },
+  {
+    "id": 55,
+    "category": "Legislação & Criptografia",
+    "difficulty": "Difícil",
+    "q": "De acordo com o art. 46 da LGPD, os agentes de tratamento devem adotar medidas de segurança, técnicas e administrativas aptas a proteger os dados pessoais de acessos não autorizados e de situações acidentais ou ilícitas. A implementação de algoritmos de cifragem simétrica (como AES-256) em uma base de dados armazenada (*data at rest*) visa salvaguardar primordialmente a:",
+    "opts": [
+      "(A) Disponibilidade.",
+      "(B) Transparência.",
+      "(C) Confidencialidade.",
+      "(D) Qualidade dos dados.",
+      "(E) Responsabilização."
+    ],
+    "ans": 2,
+    "exp": "Criptografia de dados armazenados (*data at rest*) impede o acesso e leitura por pessoas não autorizadas, garantindo a **Confidencialidade**."
+  },
+  {
+    "id": 56,
+    "category": "Legislação & Criptografia",
+    "difficulty": "Médio",
+    "q": "Considere as seguintes assertivas sobre os atributos clássicos da segurança da informação e as disposições da Lei nº 13.709/2018 (LGPD):\n\nI. A Autenticidade garante a identidade do usuário, processo ou origem da informação.\n\nII. A LGPD define expressamente em seu art. 6º o princípio da Confidencialidade Absoluta.\n\nIII. A Integridade refere-se à salvaguarda da exatidão e completude dos dados contra alterações não autorizadas.\n\nEstá correto o que se afirma em:",
+    "opts": [
+      "(A) I, apenas.",
+      "(B) II, apenas.",
+      "(C) I e III, apenas.",
+      "(D) II e III, apenas.",
+      "(E) I, II e III."
+    ],
+    "ans": 2,
+    "exp": "O item II está incorreto porque \"Confidencialidade Absoluta\" não é um princípio listado no art. 6º da LGPD."
+  },
+  {
+    "id": 57,
+    "category": "Legislação & Criptografia",
+    "difficulty": "Fácil",
+    "q": "O princípio da LGPD que impõe aos agentes de tratamento a obrigação de adotar medidas prévias para evitar a ocorrência de danos em virtude do tratamento de dados pessoais é denominado princípio da:",
+    "opts": [
+      "(A) Segurança.",
+      "(B) Prevenção.",
+      "(C) Necessidade.",
+      "(D) Prestação de contas.",
+      "(E) Adequação."
+    ],
+    "ans": 1,
+    "exp": "O art. 6º, VIII, da LGPD define explicitamente o princípio da **Prevenção** como a adoção de medidas para evitar a ocorrência de danos."
+  },
+  {
+    "id": 58,
+    "category": "Princípios de Segurança",
+    "difficulty": "Difícil",
+    "q": "Um funcionário mal-intencionado utilizou credenciais roubadas para acessar a rede corporativa fazendo-se passar pelo administrador do sistema. Nesse cenário, o mecanismo de controle falhou em garantir a:",
+    "opts": [
+      "(A) Autenticidade.",
+      "(B) Disponibilidade.",
+      "(C) Irretratabilidade.",
+      "(D) Resiliência.",
+      "(E) Legalidade."
+    ],
+    "ans": 0,
+    "exp": "O uso indevido de identidade alheia quebra a certeza sobre quem realmente está praticando a ação (**Autenticidade**)."
+  },
+  {
+    "id": 59,
+    "category": "Legislação & Criptografia",
+    "difficulty": "Médio",
+    "q": "Nos termos da LGPD, a garantia dada aos titulares de consulta facilitada e gratuita sobre a forma e a duração do tratamento, bem como sobre a integralidade de seus dados pessoais, corresponde ao princípio do(a):",
+    "opts": [
+      "(A) Livre acesso.",
+      "(B) Finalidade.",
+      "(C) Não discriminação.",
+      "(D) Segurança.",
+      "(E) Adequação."
+    ],
+    "ans": 0,
+    "exp": "O art. 6º, IV, da LGPD conceitua o **Livre Acesso** como a garantia de consulta facilitada e gratuita aos titulares."
+  },
+  {
+    "id": 60,
+    "category": "Conceitos Gerais",
+    "difficulty": "Difícil",
+    "q": "Diferente da simples autenticação (que comprova a identidade de um sujeito), o processo formal pelo qual se define o que uma entidade previamente autenticada tem permissão legal ou técnica para executar no sistema denomina-se:",
+    "opts": [
+      "(A) Resumo de mensagem.",
+      "(B) Autorização de acesso.",
+      "(C) Não repúdio.",
+      "(D) Envelopamento digital.",
+      "(E) Cifragem assimétrica."
+    ],
+    "ans": 1,
+    "exp": "A concessão/validação de privilégios para executar ações após a autenticação chama-se **Autorização de Acesso**."
+  },
+  {
+    "id": 61,
+    "category": "Legislação & Criptografia",
+    "difficulty": "Médio",
+    "q": "A limitação do tratamento de dados pessoais ao mínimo necessário para a realização de suas finalidades, com abrangência dos dados pertinentes, proporcionais e não excessivos, define o princípio da LGPD denominado:",
+    "opts": [
+      "(A) Transparência.",
+      "(B) Livre acesso.",
+      "(C) Necessidade.",
+      "(D) Adequação.",
+      "(E) Segurança."
+    ],
+    "ans": 2,
+    "exp": "O art. 6º, III, da LGPD define o princípio da **Necessidade** (ou princípio do menor privilégio/minimização dos dados)."
+  },
+  {
+    "id": 62,
+    "category": "Legislação & Criptografia",
+    "difficulty": "Fácil",
+    "q": "A utilização de funções criptográficas de *hash* (como SHA-256) em conjunto com a verificação de somas de verificação (*checksums*) em arquivos transferidos pela rede tem como finalidade primordial certificar a:",
+    "opts": [
+      "(A) Confidencialidade do tráfego.",
+      "(B) Disponibilidade do canal.",
+      "(C) Integridade dos arquivos.",
+      "(D) Irretratabilidade do receptor.",
+      "(E) Anonimização da sessão."
+    ],
+    "ans": 2,
+    "exp": "Funções de *hash* geram resumos matemáticos que servem para comprovar se um arquivo não foi modificado, atestando sua **Integridade**."
+  },
+  {
+    "id": 63,
+    "category": "Legislação & Criptografia",
+    "difficulty": "Difícil",
+    "q": "O princípio da LGPD que veda a realização de tratamento de dados pessoais para fins discriminatórios ilícitos ou abusivos denomina-se:",
+    "opts": [
+      "(A) Finalidade.",
+      "(B) Qualidade dos dados.",
+      "(C) Não discriminação.",
+      "(D) Transparência.",
+      "(E) Prevenção."
+    ],
+    "ans": 2,
+    "exp": "O art. 6º, IX, da LGPD prevê expressamente o princípio da **Não Discriminação**."
+  },
+  {
+    "id": 64,
+    "category": "Princípios de Segurança",
+    "difficulty": "Médio",
+    "q": "Um invasor interceptou pacotes HTTP em texto claro em uma rede Wi-Fi pública e obteve números de cartões de crédito e senhas digitadas por usuários legítimos. Do ponto de vista da Segurança da Informação, o pilar que sofreu a quebra definitiva foi a:",
+    "opts": [
+      "(A) Confidencialidade.",
+      "(B) Disponibilidade.",
+      "(C) Autorização.",
+      "(D) Irretratabilidade.",
+      "(E) Não repúdio."
+    ],
+    "ans": 0,
+    "exp": "A interceptação/escuta passiva (*sniffing*) de dados em trânsito viola a **Confidencialidade**."
+  },
+  {
+    "id": 65,
+    "category": "Legislação & Criptografia",
+    "difficulty": "Difícil",
+    "q": "Segundo o princípio da prestação de contas e responsabilização previsto no art. 6º, X, da LGPD, o agente de tratamento deve:",
+    "opts": [
+      "(A) Utilizar dados exclusivamente para fins fiscais e tributários.",
+      "(B) Demonstrar a adoção de medidas eficazes e capazes de comprovar a observância e o cumprimento das normas de proteção de dados pessoais.",
+      "(C) Publicar integralmente no Diário Oficial todos os contratos celebrados com operadores.",
+      "(D) Cifrar compulsoriamente todo e qualquer dado pessoal com algoritmos de chave pública.",
+      "(E) Notificar a Autoridade Nacional em até 2 horas após qualquer consulta rotineira ao banco de dados."
+    ],
+    "ans": 1,
+    "exp": "Reproduz a definição literal do princípio de **Responsabilização e Prestação de Contas** constante no art. 6º, X, da LGPD."
+  },
+  {
+    "id": 66,
+    "category": "Normas & Governança",
+    "difficulty": "Médio",
+    "q": "Um analista de segurança da informação é encarregado de implementar um Sistema de Gestão de Segurança da Informação (SGSI) em conformidade com a ABNT NBR ISO/IEC 27001:2022. De acordo com as cláusulas mandatórias dessa norma técnica, a organização deve planejar ações para tratar riscos e oportunidades, além de integrar essas ações aos processos de seu SGSI. Quanto à certificabilidade e aplicação da norma, é correto afirmar que a ISO/IEC 27001:2022:",
+    "opts": [
+      "(A) estabelece diretrizes e boas práticas não auditáveis para auditorias de conformidade.",
+      "(B) contém requisitos mandatórios para os quais uma organização pode obter certificação formal independente.",
+      "(C) exige a adoção obrigatória de todos os controles listados no Anexo A, vedando a exclusão justificada de qualquer controle.",
+      "(D) é restrita a organizações governamentais e de infraestrutura crítica de grande porte.",
+      "(E) substitui integralmente a necessidade de implementação de planos de continuidade de negócios."
+    ],
+    "ans": 1,
+    "exp": "A ISO/IEC 27001 é uma norma de requisitos mandatórios (*cláusulas 4 a 10*), sendo a única da família passível de auditoria para certificação de conformidade corporativa. A ISO 27002 é apenas um código de boas práticas não certificável."
+  },
+  {
+    "id": 67,
+    "category": "Normas & Governança",
+    "difficulty": "Fácil",
+    "q": "A ABNT NBR ISO/IEC 27002:2022 reformulou a apresentação dos seus controles de segurança da informação, agrupando-os em quatro temas e associando cada controle a cinco tipos de atributos. Dentre as categorias de atributos definidas na norma, aquela utilizada para classificar os controles do ponto de vista do ciclo de vida das ações (preventivo, detectivo e corretivo) é denominada:",
+    "opts": [
+      "(A) Domínios de Segurança.",
+      "(B) Propriedades de Segurança da Informação.",
+      "(C) Tipos de Controle.",
+      "(D) Conceitos de Cibersegurança.",
+      "(E) Capacidades Operacionais."
+    ],
+    "ans": 2,
+    "exp": "Na versão 2022 da ISO/IEC 27002, o atributo **Tipo de Controle** (*Control Type*) classifica a salvaguarda em Preventiva (*Preventive*), Detectiva (*Detective*) ou Corretiva (*Corrective*). Domínios de Segurança refere-se a Governança_e_Ecossistema, Proteção, Defesa e Resiliência (como cobrado no BNDES Q69)."
+  },
+  {
+    "id": 68,
+    "category": "Normas & Governança",
+    "difficulty": "Difícil",
+    "q": "A ABNT NBR ISO/IEC 27005:2023 provê diretrizes para a condução do processo de gestão de riscos de segurança da informação. Segundo as definições e etapas estabelecidas nessa norma técnica, a atividade que compreende a identificação do risco, a análise do risco e a avaliação do risco (*risk evaluation*) é denominada:",
+    "opts": [
+      "(A) Tratamento do risco.",
+      "(B) Processo de avaliação de riscos (*Risk assessment*).",
+      "(C) Comunicação e consulta do risco.",
+      "(D) Monitoramento e análise crítica do risco.",
+      "(E) Modificação do risco."
+    ],
+    "ans": 1,
+    "exp": "Segundo a ISO/IEC 27005 (item 8), o processo global de **avaliação de riscos (*risk assessment*)** engloba a tríade sequencial: identificação do risco, análise do risco e avaliação do risco (*risk evaluation*)."
+  },
+  {
+    "id": 69,
+    "category": "Normas & Governança",
+    "difficulty": "Médio",
+    "q": "Uma corporação adota a ABNT NBR ISO/IEC 27035-1:2023 para estruturar o seu processo de gestão de incidentes de segurança da informação. Durante a manifestação de um ataque de grande escala, a equipe técnica constata que a severidade do incidente superou a capacidade operacional interna, demandando o acionamento de medidas do Plano de Continuidade de Negócios (PCN) e do Plano de Recuperação de Desastres (PRD). Em conformidade com a ISO/IEC 27035-1:2023, essa ação de invocação deve ocorrer durante a fase de:",
+    "opts": [
+      "(A) Planejar e preparar.",
+      "(B) Detectar e comunicar.",
+      "(C) Avaliar e decidir.",
+      "(D) Responder.",
+      "(E) Lições aprendidas."
+    ],
+    "ans": 3,
+    "exp": "A ABNT NBR ISO/IEC 27035-1:2023 define que, na fase de **Responder**, realizam-se a contenção e a mitigação; caso a intensidade supere a equipe de incidentes, aciona-se formalmente o PCN/DRP (cobrado literalmente na Q45 do BNDES)."
+  },
+  {
+    "id": 70,
+    "category": "Normas & Governança",
+    "difficulty": "Difícil",
+    "q": "A ABNT NBR ISO/IEC 27035-1:2023 estabelece clara distinção conceitual entre os termos fundamentais empregados na gestão de segurança. Conforme as definições dessa norma, um **incidente de segurança da informação** distingue-se de um **evento de segurança da informação** porque o incidente:",
+    "opts": [
+      "(A) consiste exclusivamente em ações humanas voluntárias e deliberadas decorrentes de agentes externos.",
+      "(B) representa qualquer ocorrência identificada no sistema, mesmo que não apresente risco ou desvio de conformidade.",
+      "(C) possui probabilidade significativa de comprometer as operações do negócio e ameaçar a segurança da informação.",
+      "(D) ocorre unicamente quando há destruição física e irreversível dos ativos computacionais.",
+      "(E) independe de confirmação ou triagem técnica preliminar para a sua formalização no sistema."
+    ],
+    "ans": 2,
+    "exp": "Conforme o glossário da ISO/IEC 27035-1, o evento é qualquer mudança de estado ou ocorrência, enquanto o incidente é caracterizado pelo potencial ou probabilidade significativa de causar impactos adversos e comprometer as operações do negócio."
+  },
+  {
+    "id": 71,
+    "category": "Normas & Governança",
+    "difficulty": "Médio",
+    "q": "A ABNT NBR ISO 22301:2020 especifica os requisitos para implementar, manter e melhorar um Sistema de Gestão de Continuidade de Negócios (SGCN). Dentre as etapas fundamentais requeridas por essa norma na determinação das estratégias de continuidade, aquela que tem por objetivo priorizar atividades e identificar os impactos decorrentes da interrupção ao longo do tempo é o(a):",
+    "opts": [
+      "(A) Planejamento de capacidade.",
+      "(B) Análise de Impacto nos Negócios (*Business Impact Analysis* - BIA).",
+      "(C) Auditoria contínua de controles.",
+      "(D) Triagem de incidentes cibernéticos.",
+      "(E) Ensaio de intrusão físico (*Red Team*)."
+    ],
+    "ans": 1,
+    "exp": "A Análise de Impacto nos Negócios (BIA) é a ferramenta central da ISO 22301/22313 para analisar os efeitos no tempo causados por disrupções, determinando o Tempo Máximo Tolerável de Parada (MTPD) e o Objetivo de Tempo de Recuperação (RTO)."
+  },
+  {
+    "id": 72,
+    "category": "Normas & Governança",
+    "difficulty": "Fácil",
+    "q": "A ABNT NBR ISO 22313:2020 estabelece orientações e diretrizes para o suporte à implementação dos requisitos de continuidade de negócios. Ao tratar dos planos e procedimentos de continuidade, a norma define que eles devem conter procedimentos operacionais claros para responder a eventos disruptivos. Um elemento que **não** integra os procedimentos de continuidade de negócios recomendados pela norma é o(a):",
+    "opts": [
+      "(A) protocolo de comunicação e notificação para as partes interessadas internas e externas.",
+      "(B) critério formal para a desmobilização e o retorno das operações ao estado normal de operação.",
+      "(C) método de atribuição de responsabilidades operacionais durante a ativação da resposta.",
+      "(D) especificação técnica de algoritmos criptográficos para substituição em tempo real de chaves simétricas.",
+      "(E) conjunto de ações imediatas para garantir a segurança física das pessoas envolvidas."
+    ],
+    "ans": 3,
+    "exp": "A ISO 22313 detalha requisitos organizacionais, operacionais e de salvaguarda de pessoas/comunicação em crises, não tratando de parâmetros criptográficos de baixo nível."
+  },
+  {
+    "id": 73,
+    "category": "Normas & Governança",
+    "difficulty": "Difícil",
+    "q": "A ABNT NBR ISO/IEC 29100:2024 apresenta uma estrutura para a proteção de dados pessoais em sistemas de TIC, fundamentada em 11 princípios de privacidade. O princípio que assegura que os titulares de dados pessoais (*PII principals*) possam questionar a exatidão e a integridade de seus dados, bem como solicitar a sua retificação, complementação ou eliminação, denomina-se:",
+    "opts": [
+      "(A) Consentimento e escolha.",
+      "(B) Legitimidade e especificação de finalidade.",
+      "(C) Minimização de dados.",
+      "(D) Acesso e participação individual.",
+      "(E) Abertura, transparência e notificação."
+    ],
+    "ans": 3,
+    "exp": "A ISO/IEC 29100 elenca 11 princípios de privacidade; \"Acesso e participação individual\" concede ao titular o direito de consultar, retificar ou apagar dados errôneos (cobrado literalmente na Q42 do BNDES)."
+  },
+  {
+    "id": 74,
+    "category": "Normas & Governança",
+    "difficulty": "Médio",
+    "q": "A norma ABNT NBR ISO/IEC 29134:2024 fornece diretrizes para a realização da Avaliação de Impacto sobre a Privacidade (PIA - *Privacy Impact Assessment*). De acordo com essa norma, a elaboração do relatório de impacto deve ocorrer, preferencialmente:",
+    "opts": [
+      "(A) exclusivamente após a ocorrência de um vazamento em larga escala de dados sensíveis.",
+      "(B) previamente ao início da concepção ou modificação de um sistema ou processo de tratamento de dados pessoais.",
+      "(C) somente em órgãos da administração pública direta sob regime de sigilo legal.",
+      "(D) no encerramento do ciclo de vida útil do sistema, visando autorizar o descarte das mídias físicas.",
+      "(E) a cada encerramento do exercício fiscal, vinculada aos balanços contábeis da organização."
+    ],
+    "ans": 1,
+    "exp": "A Avaliação de Impacto sobre a Privacidade (PIA), padronizada pela ISO/IEC 29134 (análoga ao RIPD na LGPD), deve ser um processo preventivo e proativo (*Privacy by Design*), conduzido antes de se iniciar o tratamento."
+  },
+  {
+    "id": 75,
+    "category": "Normas & Governança",
+    "difficulty": "Difícil",
+    "q": "A norma ABNT NBR ISO/IEC 27701:2019 (versão corrigida 2020) especifica requisitos e fornece diretrizes para o estabelecimento de um Sistema de Gestão da Privacidade da Informação (SGPI/PIMS). Em sua estrutura, a ISO/IEC 27701 atua como uma:",
+    "opts": [
+      "(A) substituta da ISO/IEC 27001, dispensando a implementação do SGSI prévio.",
+      "(B) norma de criptografia exclusiva para bancos de dados relacionais em nuvem.",
+      "(C) extensão direta dos requisitos da ISO/IEC 27001 e das diretrizes da ISO/IEC 27002 para abranger a proteção de dados pessoais.",
+      "(D) diretriz setorial aplicável apenas a instituições do Sistema Financeiro Nacional.",
+      "(E) regulamentação penal para imposição de sanções administrativas no âmbito judiciário."
+    ],
+    "ans": 2,
+    "exp": "A ISO/IEC 27701 não existe isoladamente: ela atua como extensão acoplada à ISO/IEC 27001 (requisitos adicionais) e ISO/IEC 27002 (controles adicionais), distinguindo requisitos para Controladores (*PII Controllers*) e Operadores (*PII Processors*)."
+  },
+  {
+    "id": 76,
+    "category": "Legislação & Criptografia",
+    "difficulty": "Médio",
+    "q": "A Resolução nº 740/2020 da ANATEL aprova o Regulamento de Segurança Cibernética Aplicada ao Setor de Telecomunicações (R-Ciber). Conforme esse regulamento, as prestadoras de serviços de telecomunicações abrangidas devem elaborar e aprovar na alta administração um instrumento mandatório denominado:",
+    "opts": [
+      "(A) Plano de Desenvolvimento Institucional (PDI).",
+      "(B) Política de Segurança Cibernética (PSC).",
+      "(C) Acordo de Convivência Operacional de Redes.",
+      "(D) Manual de Interconexão e Tarifação Mínima.",
+      "(E) Termo de Renúncia de Responsabilidade Digital."
+    ],
+    "ans": 1,
+    "exp": "A Resolução nº 740/2020 estabelece que as prestadoras de telecomunicações devem formular e manter formalmente aprovada sua Política de Segurança Cibernética (PSC)."
+  },
+  {
+    "id": 77,
+    "category": "Normas & Governança",
+    "difficulty": "Fácil",
+    "q": "O Regulamento de Segurança Cibernética Aplicada ao Setor de Telecomunicações (R-Ciber), instituído pela Resolução nº 740/2020 da ANATEL, prevê uma instância de coordenação e atuação colegiada setorial denominada:",
+    "opts": [
+      "(A) Comitê Gestor da Internet no Brasil (CGI.br).",
+      "(B) Grupo Técnico de Segurança Cibernética e Gestão de Riscos de Infraestrutura Crítica (GT-Ciber).",
+      "(C) Autoridade Nacional de Proteção de Dados (ANPD).",
+      "(D) Departamento de Segurança da Informação do GSI (DSI/GSI).",
+      "(E) Centro de Defesa Cibernética do Exército (CDCiber)."
+    ],
+    "ans": 1,
+    "exp": "O R-Ciber cria o GT-Ciber (Grupo Técnico de Segurança Cibernética e Gestão de Riscos de Infraestrutura Crítica) para articular ações operacionais e simulados entre as operadoras e a ANATEL."
+  },
+  {
+    "id": 78,
+    "category": "Normas & Governança",
+    "difficulty": "Difícil",
+    "q": "O NIST Cybersecurity Framework (CSF) em sua versão 2.0 estabeleceu uma reestruturação do seu núcleo (*Core*), expandindo a taxonomia tradicional de funções de gerenciamento de segurança cibernética. A nova função incorporada no nível mais alto do CSF 2.0 para tratar de contexto organizacional, estratégias de risco, papéis e políticas corporativas é denominada:",
+    "opts": [
+      "(A) Proteger (*Protect*).",
+      "(B) Governar (*Govern*).",
+      "(C) Detectar (*Detect*).",
+      "(D) Responder (*Respond*).",
+      "(E) Recuperar (*Recover*)."
+    ],
+    "ans": 1,
+    "exp": "O NIST CSF 2.0 incluiu formalmente a função **Governar (*Govern - GV*)** no topo do framework, ao lado das cinco anteriores: *Identify*, *Protect*, *Detect*, *Respond* e *Recover*."
+  },
+  {
+    "id": 79,
+    "category": "Normas & Governança",
+    "difficulty": "Médio",
+    "q": "Os Controles Críticos de Segurança do Center for Internet Security (CIS Controls versão 8.1) organizam as salvaguardas em Grupos de Implementação (IG - *Implementation Groups*) com base no perfil de risco e na disponibilidade de recursos da organização. O grupo definido como o padrão essencial de \"higiene cibernética\", composto pelo conjunto básico de salvaguardas que toda organização deve implementar para combater os ataques mais comuns, é o:",
+    "opts": [
+      "(A) IG1.",
+      "(B) IG2.",
+      "(C) IG3.",
+      "(D) IG4.",
+      "(E) IG0."
+    ],
+    "ans": 0,
+    "exp": "Nos CIS Controls v8.1, o **IG1 (Implementation Group 1)** estabelece a \"Higiene Básica de Cibersegurança\" (*Cyber Hygiene*), voltada para conter os ataques oportunistas universais com salvaguardas essenciais."
+  },
+  {
+    "id": 80,
+    "category": "Legislação & Criptografia",
+    "difficulty": "Difícil",
+    "q": "O ordenamento jurídico brasileiro dispõe de diplomas específicos aplicados à segurança, dados e provimento de conexão. Ao disciplinar o armazenamento e a disponibilização de registros, a Lei nº 12.965/2014 (Marco Civil da Internet) impõe ao administrador de sistema autônomo provedor de conexão à internet a obrigação de manter os registros de conexão, sob sigilo, em ambiente seguro, pelo prazo legal mínimo de:",
+    "opts": [
+      "(A) 3 meses.",
+      "(B) 6 meses.",
+      "(C) 1 ano.",
+      "(D) 2 anos.",
+      "(E) 5 anos."
+    ],
+    "ans": 2,
+    "exp": "Segundo o art. 13 do Marco Civil da Internet (Lei nº 12.965/2014), na provisão de conexão à internet, o administrador de sistema autônomo é obrigado a guardar os **registros de conexão** pelo prazo de **1 ano** (registros de acesso a aplicações de internet, pelo art. 15, devem ser guardados por 6 meses)."
   }
 ];
 

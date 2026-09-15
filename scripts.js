@@ -8,9 +8,9 @@ let state = {
     focusIndex: 0,
     selectedCategory: 'ALL',
     searchQuery: '',
-    userAnswers: new Array(50).fill(null),
-    flagged: new Array(50).fill(false),
-    eliminated: Array.from({ length: 50 }, () => [false, false, false, false, false]),
+    userAnswers: new Array(window.quizData.length).fill(null),
+    flagged: new Array(window.quizData.length).fill(false),
+    eliminated: Array.from({ length: window.quizData.length }, () => [false, false, false, false, false]),
     isPaused: false,
     examSubmitted: false,
     soundEnabled: true,
@@ -110,7 +110,7 @@ function initCategoryChips() {
 
     container.innerHTML = categories.map(cat => `
     <button class="cat-chip ${cat === state.selectedCategory ? 'active' : ''}" onclick="selectCategory('${cat}')">
-      ${cat === 'ALL' ? '🌐 Todas as Áreas (50)' : cat}
+      ${cat === 'ALL' ? `🌐 Todas as Áreas (${window.quizData.length})` : cat}
     </button>
   `).join('');
 }
@@ -346,7 +346,7 @@ function updateHUD() {
     });
 
     const accuracy = answered > 0 ? Math.round((correctCount / answered) * 100) : 0;
-    const progressPercent = Math.round((answered / 50) * 100);
+    const progressPercent = Math.round((answered / window.quizData.length) * 100);
 
     document.getElementById('hud-answered').innerText = answered;
     document.getElementById('hud-score').innerText = `${correctCount * 2} pts`;
@@ -408,11 +408,11 @@ function finishExam() {
         }
     });
 
-    const accuracy = Math.round((correct / 50) * 100);
+    const accuracy = Math.round((correct / window.quizData.length) * 100);
     const m = Math.floor(state.timerSeconds / 60).toString().padStart(2, '0');
     const s = (state.timerSeconds % 60).toString().padStart(2, '0');
 
-    document.getElementById('modal-score').innerText = `${correct} / 50`;
+    document.getElementById('modal-score').innerText = `${correct} / ${window.quizData.length}`;
     document.getElementById('modal-accuracy').innerText = `${accuracy}%`;
     document.getElementById('modal-time').innerText = `${m}:${s}`;
 
@@ -470,7 +470,15 @@ function loadLocalStorage() {
             const data = JSON.parse(raw);
             state.userAnswers = data.userAnswers || state.userAnswers;
             state.flagged = data.flagged || state.flagged;
-            state.eliminated = data.eliminated || Array.from({ length: 50 }, () => [false, false, false, false, false]);
+            state.eliminated = data.eliminated || Array.from({ length: window.quizData.length }, () => [false, false, false, false, false]);
+            
+            // Fix sizes in case local storage had fewer items than current quiz data
+            if (state.userAnswers.length < window.quizData.length) {
+                const diff = window.quizData.length - state.userAnswers.length;
+                state.userAnswers.push(...new Array(diff).fill(null));
+                state.flagged.push(...new Array(diff).fill(false));
+                for(let i=0; i<diff; i++) state.eliminated.push([false, false, false, false, false]);
+            }
             state.mode = data.mode || state.mode;
             state.timerSeconds = data.timerSeconds || 0;
             state.streak = data.streak || 0;
@@ -487,9 +495,9 @@ function loadLocalStorage() {
 function confirmResetQuiz() {
     if (confirm('Tem certeza de que deseja reiniciar o simulado? Suas respostas e marcações serão apagadas.')) {
         localStorage.removeItem('transpetro_quiz_state');
-        state.userAnswers = new Array(50).fill(null);
-        state.flagged = new Array(50).fill(false);
-        state.eliminated = Array.from({ length: 50 }, () => [false, false, false, false, false]);
+        state.userAnswers = new Array(window.quizData.length).fill(null);
+        state.flagged = new Array(window.quizData.length).fill(false);
+        state.eliminated = Array.from({ length: window.quizData.length }, () => [false, false, false, false, false]);
         state.timerSeconds = 0;
         state.streak = 0;
         state.examSubmitted = false;
