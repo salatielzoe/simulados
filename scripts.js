@@ -138,7 +138,7 @@ mergeAndInitQuizData();
 
 let state = {
     mode: 'study', // 'study' | 'exam'
-    viewType: 'list', // 'list' | 'focus'
+    viewType: 'focus', // 'focus' (padrão) | 'list'
     focusIndex: 0,
     selectedExam: 'ALL', // 'ALL' | 'CESGRANRIO' | 'FGV'
     selectedCategory: 'ALL',
@@ -332,12 +332,21 @@ function handleSearch() {
     renderGrid();
 }
 
-function setMode(mode) {
-    state.mode = mode;
+function updateModeAndTypeButtons() {
+    const listBtn = document.getElementById('view-list');
+    const focusBtn = document.getElementById('view-focus');
+    if (listBtn) listBtn.classList.toggle('active', state.viewType === 'list');
+    if (focusBtn) focusBtn.classList.toggle('active', state.viewType === 'focus');
+
     const studyBtn = document.getElementById('mode-study');
     const examBtn = document.getElementById('mode-exam');
-    if (studyBtn) studyBtn.classList.toggle('active', mode === 'study');
-    if (examBtn) examBtn.classList.toggle('active', mode === 'exam');
+    if (studyBtn) studyBtn.classList.toggle('active', state.mode === 'study');
+    if (examBtn) examBtn.classList.toggle('active', state.mode === 'exam');
+}
+
+function setMode(mode) {
+    state.mode = mode;
+    updateModeAndTypeButtons();
     renderQuiz();
     renderGrid();
     saveLocalStorage();
@@ -345,12 +354,10 @@ function setMode(mode) {
 
 function setViewType(type) {
     state.viewType = type;
-    const listBtn = document.getElementById('view-list');
-    const focusBtn = document.getElementById('view-focus');
-    if (listBtn) listBtn.classList.toggle('active', type === 'list');
-    if (focusBtn) focusBtn.classList.toggle('active', type === 'focus');
+    updateModeAndTypeButtons();
     renderQuiz();
     renderGrid();
+    saveLocalStorage();
 }
 
 function toggleGridDrawer() {
@@ -549,6 +556,7 @@ function toggleFlag(qIndex) {
 function prevFocusCard() {
     if (state.focusIndex > 0) {
         state.focusIndex--;
+        saveLocalStorage();
         renderQuiz();
         renderGrid();
     }
@@ -558,6 +566,7 @@ function nextFocusCard() {
     const questions = getFilteredQuestions();
     if (state.focusIndex < questions.length - 1) {
         state.focusIndex++;
+        saveLocalStorage();
         renderQuiz();
         renderGrid();
     }
@@ -644,6 +653,7 @@ function renderGrid() {
                     const newFiltered = getFilteredQuestions();
                     state.focusIndex = newFiltered.findIndex(item => item._index === idx);
                 }
+                saveLocalStorage();
                 renderQuiz();
                 renderGrid();
             } else {
@@ -782,6 +792,8 @@ function saveLocalStorage() {
         flagged: state.flagged,
         eliminated: state.eliminated,
         mode: state.mode,
+        viewType: state.viewType,
+        focusIndex: state.focusIndex,
         selectedExam: state.selectedExam,
         selectedCategory: state.selectedCategory,
         timerSeconds: state.timerSeconds,
@@ -808,6 +820,10 @@ function loadLocalStorage() {
                 for(let i=0; i<diff; i++) state.eliminated.push([false, false, false, false, false]);
             }
             state.mode = data.mode || state.mode;
+            state.viewType = data.viewType || 'focus';
+            if (typeof data.focusIndex === 'number' && data.focusIndex >= 0) {
+                state.focusIndex = data.focusIndex;
+            }
             state.selectedExam = data.selectedExam || 'ALL';
             state.selectedCategory = data.selectedCategory || 'ALL';
             state.timerSeconds = data.timerSeconds || 0;
@@ -821,6 +837,7 @@ function loadLocalStorage() {
             }
         } catch (e) { }
     }
+    updateModeAndTypeButtons();
 }
 
 function confirmResetQuiz() {
