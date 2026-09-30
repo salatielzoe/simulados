@@ -903,6 +903,64 @@ kbd {
     color: var(--primary-glow);
 }
 
+/* Filtros por Banca e Tags Adicionais */
+.banca-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.banca-chip {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    background: #1e293b;
+    color: #94a3b8;
+    border: 1px solid #334155;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.banca-chip:hover {
+    color: white;
+    background: #334155;
+    border-color: #475569;
+}
+
+.banca-chip.active {
+    background: rgba(139, 92, 246, 0.2);
+    color: #c084fc;
+    border-color: rgba(192, 132, 252, 0.5);
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.2);
+}
+
+.q-matter-tag {
+    background: rgba(139, 92, 246, 0.12);
+    color: #c084fc;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid rgba(192, 132, 252, 0.25);
+}
+
+.q-grid-item.banca-fgv {
+    border-bottom: 3px solid #a855f7;
+}
+
+.q-grid-item.banca-cesgranrio {
+    border-bottom: 3px solid #06b6d4;
+}
+
+.q-grid-item.dim-filtered {
+    opacity: 0.35;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
     .main-header {
