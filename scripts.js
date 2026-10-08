@@ -36,9 +36,20 @@ const categoryMap = {
 function mergeAndInitQuizData() {
     let combined = [];
 
-    // 1. Banco principal (data.js) - Cesgranrio Base (80 questões)
-    if (typeof window !== 'undefined' && Array.isArray(window.quizData)) {
-        window.quizData.forEach(q => {
+    // Preserva o array base de data.js para permitir chamadas idempotentes sem duplicações
+    if (typeof window !== 'undefined') {
+        if (!window._quizDataBase && Array.isArray(window.quizData)) {
+            window._quizDataBase = window.quizData.slice();
+        }
+    }
+
+    const baseSource = (typeof window !== 'undefined' && window._quizDataBase)
+        ? window._quizDataBase
+        : (typeof quizData !== 'undefined' ? quizData : []);
+
+    // 1. Banco principal (data.js) - Cesgranrio Base (80 questões: IDs 1-80)
+    if (Array.isArray(baseSource)) {
+        baseSource.forEach(q => {
             const cat = categoryMap[q.category] || q.category;
             combined.push({
                 ...q,
@@ -49,7 +60,7 @@ function mergeAndInitQuizData() {
         });
     }
 
-    // 2. Lote 01 Cesgranrio (dbs/data_lote01_cesgranrio.js) - 15 questões
+    // 2. Lote 01 Cesgranrio (dbs/data_lote01_cesgranrio.js) - 15 questões (IDs 81-95)
     const cesgLote01 = (typeof window !== 'undefined') ? (window.quizDataCesgranrioLote01 || window.quizDataLote01Cesgranrio || window.quizDataLote01) : null;
     if (Array.isArray(cesgLote01)) {
         cesgLote01.forEach(q => {
@@ -58,7 +69,7 @@ function mergeAndInitQuizData() {
                 const cat = categoryMap[q.category] || q.category;
                 combined.push({
                     ...q,
-                    originalId: q.id,
+                    originalId: q.originalId || q.id,
                     category: cat,
                     exam: 'CESGRANRIO',
                     matter: q.matter || q.category
@@ -67,7 +78,7 @@ function mergeAndInitQuizData() {
         });
     }
 
-    // 3. Lote 02 Cesgranrio (dbs/data_lote02_cesgranrio.js) - 15 questões
+    // 3. Lote 02 Cesgranrio (dbs/data_lote02_cesgranrio.js) - 15 questões (IDs 96-110)
     const cesgLote02 = (typeof window !== 'undefined') ? window.quizDataCesgranrioLote02 : null;
     if (Array.isArray(cesgLote02)) {
         cesgLote02.forEach(q => {
@@ -76,7 +87,7 @@ function mergeAndInitQuizData() {
                 const cat = categoryMap[q.category] || q.category;
                 combined.push({
                     ...q,
-                    originalId: q.id,
+                    originalId: q.originalId || q.id,
                     category: cat,
                     exam: 'CESGRANRIO',
                     matter: q.matter || q.category
@@ -85,25 +96,7 @@ function mergeAndInitQuizData() {
         });
     }
 
-    // 4. Lote 01 FGV (dbs/data_lote01_fgv.js) - 15 questões
-    const fgvLote01 = (typeof window !== 'undefined') ? (window.quizDataFgvLote01 || window.quizDataLote01Fgv) : null;
-    if (Array.isArray(fgvLote01)) {
-        fgvLote01.forEach(q => {
-            const exists = combined.some(item => item.exam === 'FGV' && item.q.trim() === q.q.trim());
-            if (!exists) {
-                const cat = categoryMap[q.category] || q.category;
-                combined.push({
-                    ...q,
-                    originalId: q.originalId || q.id,
-                    category: cat,
-                    exam: 'FGV',
-                    matter: q.matter || q.category
-                });
-            }
-        });
-    }
-
-    // 5. Lote 02 FGV (dbs/data_lote02_fgv.js) - 15 questões
+    // 4. Lote 02 FGV (dbs/data_lote02_fgv.js) - 15 questões (IDs 111-125, originalId 16-30)
     const fgvLote02 = (typeof window !== 'undefined') ? window.quizDataFgvLote02 : null;
     if (Array.isArray(fgvLote02)) {
         fgvLote02.forEach(q => {
@@ -115,16 +108,75 @@ function mergeAndInitQuizData() {
                     originalId: q.originalId || q.id,
                     category: cat,
                     exam: 'FGV',
-                    matter: q.matter || q.category
+                    matter: q.matter || q.category,
+                    module: q.module || 'Conhecimentos Específicos'
                 });
             }
         });
     }
 
-    // Normalização sequencial de id e _index
+    // 5. Lote 03 FGV (dbs/data_lote03_fgv.js) - 30 questões (IDs globais 126-155, originalId 41-70)
+    const fgvLote03 = (typeof window !== 'undefined') ? (window.quizDataFgvLote03 || window.quizDataLote03Fgv) : null;
+    if (Array.isArray(fgvLote03)) {
+        fgvLote03.forEach(q => {
+            const exists = combined.some(item => item.exam === 'FGV' && item.q.trim() === q.q.trim());
+            if (!exists) {
+                const cat = categoryMap[q.category] || q.category;
+                combined.push({
+                    ...q,
+                    originalId: q.originalId || q.id,
+                    category: cat,
+                    exam: 'FGV',
+                    matter: q.matter || q.category,
+                    module: q.module || 'Conhecimentos Específicos'
+                });
+            }
+        });
+    }
+
+    // 6. Lote 04 FGV (dbs/data_lote04_fgv_conhecimentos_gerais.js) - 40 questões (IDs globais 156-195, originalId 1-40)
+    const fgvLote04 = (typeof window !== 'undefined') ? (window.quizDataFgvLote04 || window.quizDataLote04Fgv) : null;
+    if (Array.isArray(fgvLote04)) {
+        fgvLote04.forEach(q => {
+            const exists = combined.some(item => item.exam === 'FGV' && item.q.trim() === q.q.trim());
+            if (!exists) {
+                const cat = categoryMap[q.category] || q.category;
+                combined.push({
+                    ...q,
+                    originalId: q.originalId || q.id,
+                    category: cat,
+                    exam: 'FGV',
+                    matter: q.matter || q.category,
+                    module: q.module || 'Conhecimentos Gerais'
+                });
+            }
+        });
+    }
+
+    // 7. Lote 01 FGV (dbs/data_lote01_fgv.js) - 15 questões (IDs globais 196-210, originalId 1-15)
+    const fgvLote01 = (typeof window !== 'undefined') ? (window.quizDataFgvLote01 || window.quizDataLote01Fgv) : null;
+    if (Array.isArray(fgvLote01)) {
+        fgvLote01.forEach(q => {
+            const exists = combined.some(item => item.exam === 'FGV' && item.q.trim() === q.q.trim());
+            if (!exists) {
+                const cat = categoryMap[q.category] || q.category;
+                combined.push({
+                    ...q,
+                    id: (q.id <= 15) ? (195 + q.id) : q.id,
+                    originalId: q.originalId || q.id,
+                    category: cat,
+                    exam: 'FGV',
+                    matter: q.matter || q.category,
+                    module: q.module || 'Conhecimentos Específicos'
+                });
+            }
+        });
+    }
+
+    // Ordenação e indexação preservando estritamente os IDs globais
+    combined.sort((a, b) => a.id - b.id);
     combined.forEach((q, idx) => {
         q._index = idx;
-        q.id = idx + 1; // 1 a N
     });
 
     if (typeof window !== 'undefined') {
@@ -153,6 +205,9 @@ let state = {
     timerInterval: null,
     streak: 0
 };
+if (typeof window !== 'undefined') {
+    window.state = state;
+}
 
 // Web Audio API Synth (Som sem dependências externas)
 const audioCtx = typeof window !== 'undefined' && (window.AudioContext || window.webkitAudioContext) ? new (window.AudioContext || window.webkitAudioContext)() : null;
@@ -288,7 +343,7 @@ function selectBanca(banca) {
     saveLocalStorage();
 }
 
-// Filtro de Categorias
+// Filtro de Categorias / Matérias / Módulos
 function initCategoryChips() {
     const container = document.getElementById('category-chips');
     if (!container) return;
@@ -298,22 +353,53 @@ function initCategoryChips() {
         ? window.quizData
         : window.quizData.filter(q => q.exam === state.selectedExam);
 
-    const categories = ['ALL', ...new Set(pool.map(q => q.category))];
+    const filterList = [
+        { id: 'ALL', label: `🌐 Todas as Áreas (${pool.length})` }
+    ];
 
-    container.innerHTML = categories.map(cat => {
-        let label = '';
-        if (cat === 'ALL') {
-            label = `🌐 Todas as Áreas (${pool.length})`;
-        } else {
-            const count = pool.filter(q => q.category === cat).length;
-            label = `${cat} (${count})`;
+    // 1. Módulos quando presentes no pool (Conhecimentos Gerais / Conhecimentos Específicos)
+    const modules = [...new Set(pool.map(q => q.module).filter(Boolean))];
+    modules.forEach(mod => {
+        const count = pool.filter(q => q.module === mod).length;
+        if (count > 0) {
+            filterList.push({ id: mod, label: `📚 ${mod} (${count})` });
         }
-        return `
-            <button class="cat-chip ${cat === state.selectedCategory ? 'active' : ''}" onclick="selectCategory('${cat}')">
-                ${label}
-            </button>
-        `;
-    }).join('');
+    });
+
+    // 2. Matérias de Conhecimentos Gerais (Língua Portuguesa, Inglesa, RLM, Atualidades/IA, Legislação)
+    const generalMatters = [
+        'Língua Portuguesa',
+        'Língua Inglesa',
+        'Raciocínio Lógico Matemático',
+        'Atualidades e Inteligência Artificial',
+        'Legislação acerca de Segurança da Informação e Proteção de Dados'
+    ];
+    generalMatters.forEach(mat => {
+        const count = pool.filter(q => q.matter === mat).length;
+        if (count > 0) {
+            filterList.push({ id: mat, label: `${mat} (${count})` });
+        }
+    });
+
+    // 3. Categorias de TI e Conhecimentos Específicos
+    const techCategories = new Set();
+    pool.forEach(q => {
+        if (q.module === 'Conhecimentos Gerais') return;
+        if (q.category) techCategories.add(q.category);
+    });
+
+    Array.from(techCategories).sort().forEach(cat => {
+        const count = pool.filter(q => q.category === cat && q.module !== 'Conhecimentos Gerais').length;
+        if (count > 0) {
+            filterList.push({ id: cat, label: `${cat} (${count})` });
+        }
+    });
+
+    container.innerHTML = filterList.map(item => `
+        <button class="cat-chip ${item.id === state.selectedCategory ? 'active' : ''}" onclick="selectCategory('${item.id.replace(/'/g, "\\'")}')">
+            ${item.label}
+        </button>
+    `).join('');
 }
 
 function selectCategory(cat) {
@@ -369,15 +455,19 @@ function toggleGridDrawer() {
 function getFilteredQuestions() {
     return window.quizData.filter(q => {
         const matchesExam = state.selectedExam === 'ALL' || q.exam === state.selectedExam;
-        const matchesCat = state.selectedCategory === 'ALL' || q.category === state.selectedCategory;
+        const matchesFilter = state.selectedCategory === 'ALL' ||
+            q.category === state.selectedCategory ||
+            q.matter === state.selectedCategory ||
+            q.module === state.selectedCategory;
         const matchesSearch = !state.searchQuery ||
             q.q.toLowerCase().includes(state.searchQuery) ||
             (q.exp && q.exp.toLowerCase().includes(state.searchQuery)) ||
             (q.matter && q.matter.toLowerCase().includes(state.searchQuery)) ||
             (q.category && q.category.toLowerCase().includes(state.searchQuery)) ||
+            (q.module && q.module.toLowerCase().includes(state.searchQuery)) ||
             (q.exam && q.exam.toLowerCase().includes(state.searchQuery)) ||
             q.opts.some(o => o.toLowerCase().includes(state.searchQuery));
-        return matchesExam && matchesCat && matchesSearch;
+        return matchesExam && matchesFilter && matchesSearch;
     });
 }
 
@@ -486,6 +576,9 @@ function createQuestionCard(item, currentIdx, totalIdx) {
     const originalSubInfo = item.originalId && item.exam === 'FGV' 
         ? ` <span style="font-size:0.75rem; opacity:0.75; font-weight:normal;">(FGV #${item.originalId})</span>` 
         : '';
+    const moduleHtml = item.module 
+        ? `<span class="badge ${item.module === 'Conhecimentos Gerais' ? 'badge-cyan' : 'badge-purple'}" style="font-size:0.72rem; padding: 2px 8px;">${item.module}</span>` 
+        : '';
     const matterHtml = item.matter && item.matter !== item.category 
         ? `<span class="q-matter-tag">${item.matter}</span>` 
         : '';
@@ -495,6 +588,7 @@ function createQuestionCard(item, currentIdx, totalIdx) {
             <div class="q-meta">
                 <span class="q-num-tag">Questão ${item.id}${originalSubInfo}</span>
                 <span class="badge ${examBadgeClass}" style="font-size:0.72rem; padding: 2px 8px;">${item.exam}</span>
+                ${moduleHtml}
                 ${matterHtml}
                 <span class="q-category-tag">${item.category}</span>
                 <span class="q-difficulty-tag ${diffClass}">${item.difficulty}</span>
@@ -697,8 +791,9 @@ function finishExam() {
     };
 
     window.quizData.forEach((q, idx) => {
-        if (!catStats[q.category]) catStats[q.category] = { total: 0, correct: 0 };
-        catStats[q.category].total++;
+        const areaKey = (q.module === 'Conhecimentos Gerais' && q.matter) ? q.matter : q.category;
+        if (!catStats[areaKey]) catStats[areaKey] = { total: 0, correct: 0 };
+        catStats[areaKey].total++;
 
         const examKey = q.exam || 'CESGRANRIO';
         if (!examStats[examKey]) examStats[examKey] = { total: 0, correct: 0 };
@@ -706,7 +801,7 @@ function finishExam() {
 
         if (state.userAnswers[idx] === q.ans) {
             correct++;
-            catStats[q.category].correct++;
+            catStats[areaKey].correct++;
             examStats[examKey].correct++;
         }
     });
@@ -886,4 +981,15 @@ function setupKeyboardShortcuts() {
         else if (key === 'F') toggleFlag(currentQIndex);
         else if (key === 'G') toggleGridDrawer();
     });
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        mergeAndInitQuizData,
+        getFilteredQuestions,
+        categoryMap,
+        state,
+        selectAnswer,
+        finishExam
+    };
 }
